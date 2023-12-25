@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -7,7 +7,6 @@ import {
 import FormInput from "../form-input/form-input";
 import './sign-up.scss'
 import Button from "../button/button";
-
 const defaultFormFields = {
   displayName: "",
   email: "",
@@ -19,11 +18,14 @@ const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
+  
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
     
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -37,7 +39,7 @@ const SignUpForm = () => {
         email,
         password
       );
-
+      
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields()
     } catch (error) {
